@@ -21,7 +21,7 @@
 %endif
 
 Name:           python-%{srcname}
-Version:        8.0.2
+Version:        8.1.1
 Release:        1%{?dist}
 Summary:        A tool for installing and managing Python packages
 
@@ -36,8 +36,6 @@ Source0:        http://pypi.python.org/packages/source/p/pip/%{srcname}-%{versio
 %if 0%{?with_tests}
 Source1:        pip-8.0.2-tests.tar.gz
 %endif
-
-Patch0:         pip-1.5rc1-allow-stripping-prefix-from-wheel-RECORD-files.patch
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -102,8 +100,6 @@ easy_installable should be pip-installable as well.
 %if 0%{?with_tests}
 tar -xf %{SOURCE1}
 %endif
-
-%patch0 -p1
 
 %{__sed} -i '1d' pip/__init__.py
 
@@ -235,6 +231,10 @@ popd
 %endif # with_python3
 
 %changelog
+* Sun May 01 2016 Jajauma's Packages <jajauma@yandex.ru> - 8.1.1-1
+- Update to the latest upstream release
+- Drop 'stripping prefix' patch
+
 * Mon Feb 22 2016 Slavek Kabrda <bkabrda@redhat.com> - 8.0.2-1
 - Update to 8.0.2
 
